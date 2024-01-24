@@ -61,6 +61,7 @@ builder.Services.AddScoped<IDirectRepository, DirectRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IRealEstateRepository, RealEstateRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymenRepository>();
 
 
 
@@ -70,6 +71,7 @@ builder.Services.AddScoped<IDirectService, DirectServiceImpl>();
 builder.Services.AddScoped<IAccountService, AccountServiceImpl>();
 builder.Services.AddScoped<IRoleService, RoleServiceImpl>();
 builder.Services.AddScoped<IRealEstateService, RealEstateServiceImpl>();
+builder.Services.AddScoped<IPaymentService, PaymentServiceImpl>();
 
 
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zGoVcdLDMvOmS20Xab2QJ/DRmZvBkHjZW0M769yMpgkKht77sLUv8bt94ac0ykYqPIdgka5Xb0mx4/y8n/Ljgg==",
+  "dgSpecHash": "VenrkBosXii3Mccz1ywiYSNnHIPc73Q8WW9o2wsIPRFQI2kTpa+t2B0RGG4Tuzer20nXB9E66uE4iZFTBEZEiw==",
   "success": true,
-  "projectFilePath": "D:\\RealEstateTestApi\\RealEstateTestApi.csproj",
+  "projectFilePath": "E:\\RE-LEARN\\SWP391\\SWP391-TEAM1-SP24\\RealEstateTestApi\\RealEstateTestApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.26\\microsoft.aspnetcore.authentication.jwtbearer.6.0.26.nupkg.sha512",
