@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RealEstateTestApi.DTO;
 using RealEstateTestApi.IRepository;
+using RealEstateTestApi.IService;
 using RealEstateTestApi.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,9 +13,11 @@ namespace RealEstateTestApi.Controllers
     public class LocationController : ControllerBase
     {
         private ILocationRepository locationRepository;
-        public LocationController(ILocationRepository locationRepository)
+        private ILocationService locationService;
+        public LocationController(ILocationRepository locationRepository, ILocationService locationService)
         {
-            this.locationRepository = locationRepository;            
+            this.locationRepository = locationRepository;
+            this.locationService = locationService;
         }
 
         // GET api/<list location>       
@@ -30,7 +34,49 @@ namespace RealEstateTestApi.Controllers
             {
                 return NotFound();
             }
-        }      
+        }
+
+        [HttpGet]
+        [Route("getLocationById/{id}")]
+        public IActionResult getLocationById(int id)
+        {
+            try
+            {
+                Location location = locationRepository.findLocationById(id);
+                if (location == null)
+                {
+                    return BadRequest("Không tìm thấy id");
+                }
+                return Ok(location);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPut]
+        [Route("updateLocationById/{id}")]
+        public IActionResult updateLocationById(int id, LocationDto locationDto) 
+        {
+            try
+            {
+                Location location = locationRepository.findLocationById(id);
+                if (location == null)
+                {
+                    return BadRequest("Không tìm thấy id của vị trí");
+                }
+                location.Ward = locationDto.Ward;
+                location.District = locationDto.District;
+                location.City = locationDto.City;
+                location.Status = locationDto.Status;
+                return Ok("Chỉnh sửa thành công");
+            }
+            catch
+            {
+                return BadRequest("Không thể cập nhật vị trí");
+            }
+        }
         
     }
 }

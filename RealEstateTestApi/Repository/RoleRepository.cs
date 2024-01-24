@@ -1,4 +1,5 @@
 ﻿using RealEstateTestApi.Data;
+using RealEstateTestApi.DTO;
 using RealEstateTestApi.IRepository;
 using RealEstateTestApi.Models;
 using System.Reflection.Metadata.Ecma335;
@@ -16,6 +17,22 @@ namespace RealEstateTestApi.Repository
         {
             List<Role> roleList = swpRealEstateContext.Roles.ToList();
             return roleList;
+        }
+        public void createRole(Role role)
+        {
+            swpRealEstateContext.Roles.Add(role);
+            swpRealEstateContext.SaveChanges();
+        }
+        public Role findRoleById(int id)
+        {
+            Role role = swpRealEstateContext.Roles.Find(id);
+            return role;
+        }
+
+        public void updateRoleById(Role role)
+        {
+            swpRealEstateContext.Roles.Update(role);
+            swpRealEstateContext.SaveChanges();
         }
     }
 }

@@ -26,7 +26,6 @@ namespace RealEstateTestApi.Controllers
             {
                 List<Payment> payments = paymentRepository.GetAllPayment();
                 return Ok(payments);
-
             }
             catch (Exception ex)
             {
