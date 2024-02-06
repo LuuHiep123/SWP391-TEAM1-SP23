@@ -31,6 +31,7 @@ const Home = () => {
         removeToken();
         localStorage.removeItem('accessToken');
         localStorage.removeItem('userLoginBasicInformationDto');
+        // Navigate to the Login page after logout
         navigate('/login');
     };
 
@@ -45,36 +46,33 @@ const Home = () => {
         roomNumber: '',
         price: '',
         discount: '',
+
     });
 
-    const [hardcodedValues, setHardcodedValues] = useState({
-        firebaseId: "",
-        investorId: 2,
-        payId: 1,
-        locationId: 0,
-        directId: 2,
-        perimeter: "50",
-        legalStatus: "Sổ Đỏ",
-        status: true,
-        ward: selectedLocation.wardName,
-        district: selectedLocation.districtName,
-        city: selectedLocation.provinceName,
-    });
+
 
     const submitDataToSwagger = async () => {
         try {
-            const imageRef1 = ref(storage, "fileofpaper-id-" + userLoginBasicInformationDto.accountId + "/image");
-            const imageRef2 = ref(storage, "fileofreal-id-" + userLoginBasicInformationDto.accountId + "/image1");
-
-            await uploadBytes(imageRef1, image1);
-            const downloadURL1 = await getDownloadURL(imageRef1);
-
-            await uploadBytes(imageRef2, image2);
-            const downloadURL2 = await getDownloadURL(imageRef2);
+            const hardcodedValues = {
+                "firebaseId": "",
+                "investorId": 2,
+                "payId": 1,
+                "locationId": 0,
+                "directId": 2,
+                "perimeter": "50",
+                "legalStatus": "Sổ Đỏ",
+                "status": true,
+                "ward": selectedLocation.wardName,
+                "district": selectedLocation.districtName,
+                "city": selectedLocation.provinceName,
+            };
 
             const dataToSubmit = {
                 ...hardcodedValues,
                 ...propertyInfo,
+                //   location: selectedLocation,
+                //   image: ur,
+            
             };
 
             console.log('Selected Location:', selectedLocation);
@@ -96,87 +94,35 @@ const Home = () => {
             );
 
             console.log('Data pushed to Swagger successfully.');
+
         } catch (error) {
             console.error('Failed to push data to Swagger:', error.message);
         }
     };
 
-    const [image1, setImage1] = useState(null);
-    const [image2, setImage2] = useState(null);
-    const [downloadURLs, setDownloadURLs] = useState([]);
-    const [ur, setUr] = useState(null);
-    const [url, setUrl] = useState(null);
-
-    const handleImageChange = (event) => {
-        const files = event.target.files;
-        setImage1(files);
-    };
-
-    const handleImageChange1 = (e) => {
-        if (e.target.files[0]) {
-            setImage2(e.target.files[0]);
-        }
-    };
-
-    const handleSubmit = async () => {
-        const accountId = userLoginBasicInformationDto.accountId;
-        const storagePath = "fileofpaper-id-" + accountId + "/image";
-        const downloadURLsArray = [];
-        for (let i = 0; i < image1.length; i++) {
-            const image = image1[i];
-            const imageRef = ref(storage, `${storagePath}/image_${i}`);
-
-            try {
-                await uploadBytes(imageRef, image);
-                const downloadURL = await getDownloadURL(imageRef);
-                downloadURLsArray.push(downloadURL);
-                console.log(`Download URL for image_${i}:`, downloadURL);
-            } catch (error) {
-                console.error(`Error uploading image_${i}:`, error.message);
-            }
-        }
-
-        setDownloadURLs(downloadURLsArray);
-
-        const firstDownloadURL = downloadURLsArray[0] || "";
-        setUr(firstDownloadURL);
-
-        setHardcodedValues((prevValues) => ({ ...prevValues, firebaseId: firstDownloadURL }));
-    };
-
-    const handleSubmit1 = async () => {
-        const imageRef2 = ref(storage, "fileofreal-id-" + userLoginBasicInformationDto.accountId + "/image1");
-        try {
-            await uploadBytes(imageRef2, image2);
-            const downloadURL = await getDownloadURL(imageRef2);
-            setUrl(downloadURL);
-
-            setImage2(null);
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
-
-    const fetchImages = async () => {
-        try {
-            const response = await axios.get("http://firstrealestate-001-site1.anytempurl.com/api/invester/getAllRealEstate");
-            const imageUrls = response.data;
-
-            setUr(imageUrls[0]);
-            setUrl(imageUrls[1]);
-        } catch (error) {
-            console.error("Error fetching images:", error.message);
-        }
-    };
-
-    useEffect(() => {
-        fetchImages();
-    }, []);
+    // const handleSubmitImage = () => {
+    //     const imageRef = ref(storage, "image");
+    //     uploadBytes(imageRef, image)
+    //         .then(() => {
+    //             getDownloadURL(imageRef)
+    //                 .then((imageUrl) => {
+    //                     setUr(imageUrl);
+    //                 })
+    //                 .catch((error) => {
+    //                     console.log(error.message, "error getting the image URL");
+    //                 });
+    //             setImage(null);
+    //         })
+    //         .catch((error) => {
+    //             console.error('Failed to upload image:', error.message);
+    //         });
+    // };
 
     const handleSubmitData = async () => {
         try {
             await submitDataToSwagger();
 
+            // Optionally, you can reset the form or perform any other actions after successful submission
             setPropertyInfo({
                 realestateName: '',
                 address: '',
@@ -188,6 +134,7 @@ const Home = () => {
                 roomNumber: '',
                 price: '',
                 discount: '',
+
             });
 
             console.log('Data submitted to Swagger successfully!');
@@ -195,13 +142,79 @@ const Home = () => {
             console.error('Failed to submit data:', error.message);
         }
     };
+// upload image to firebase
+    const [image1, setImage1] = useState(null);
+    const [image2, setImage2] = useState(null);
+    const [ur, setUr] = useState(null);
+    const [url, setUrl] = useState(null);
+
+    const handleImageChange = (e) => {
+        if (e.target.files[0]) {
+            setImage1(e.target.files[0]);
+        }
+    };
+
+    const handleImageChange1 = (e) => {
+        if (e.target.files[0]) {
+            setImage2(e.target.files[0]);
+        }
+    };
+
+    const handleSubmit = async () => {
+        const imageRef1 = ref(storage, "fileofpaper/");
+        try {
+            await uploadBytes(imageRef1, image1);
+            const downloadURL = await getDownloadURL(imageRef1);
+            setUr(downloadURL);
+
+            // Save the downloadURL to your state or use it as needed
+            // In this example, we are logging it to the console
+            console.log('Download URL for image1:', downloadURL);
+
+            setImage1(null);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+    const handleSubmit1 = async () => {
+        const imageRef2 = ref(storage, "fileofrealestate/");
+        try {
+            await uploadBytes(imageRef2, image2);
+            const downloadURL = await getDownloadURL(imageRef2);
+            setUrl(downloadURL);
+
+            // Save the downloadURL to your state or use it as needed
+            // In this example, we are logging it to the console
+            console.log('Download URL for image2:', downloadURL);
+
+            setImage2(null);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+    const fetchImages = async () => {
+        try {
+            // Make API call to get image URLs from Swagger endpoint - replace URL accordingly
+            const response = await axios.get("http://firstrealestate-001-site1.anytempurl.com/api/invester/getAllRealEstate");
+
+            const imageUrls = response.data; // Adjust this based on your actual API response structure
+
+            setUr(imageUrls[0]); // Assuming the first image is associated with setUr
+            setUrl(imageUrls[1]); // Assuming the second image is associated with setUrl
+        } catch (error) {
+            console.error("Error fetching images:", error.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchImages();
+    }, []); // Empty dependency array ensures the effect runs only once on mount
 
     return (
         <div className='container'>
             <div className="col-md-3 account">
                 <span>Welcome, {userLoginBasicInformationDto.username}!</span>
                 <span>Your role is: {userLoginBasicInformationDto.roleName}</span>
-                <span>Your role is: {userLoginBasicInformationDto.accountId}</span>
                 <button className='buuton-logout' onClick={handleLogout}>Logout</button>
             </div>
             <div className="col-md-9 a">
@@ -270,11 +283,9 @@ const Home = () => {
                     />
                     <span>Hình ảnh giấy tờ</span>
                     <div className="App">
-                        {downloadURLs.map((url, index) => (
-                            <Avatar key={index} src={url} sx={{ width: 300, height: 300 }} variant="square" />
-                        ))}
+                        <Avatar src={ur} sx={{ width: 300, height: 300 }} variant="square" />
 
-                        <input type="file" onChange={handleImageChange} multiple />
+                        <input type="file" onChange={handleImageChange} />
                         <button onClick={handleSubmit}>Submit</button>
                     </div>
                     <span>Hình ảnh thực tế</span>
@@ -289,6 +300,6 @@ const Home = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Home;
