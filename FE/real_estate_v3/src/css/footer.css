@@ -102,7 +102,7 @@ body {
 }
 
 .project-list a:hover {
-    color: rgba(98, 215, 55, 0.921);
+    color: #90c908;
 }
 
 .list {
@@ -114,7 +114,7 @@ body {
     height: 40px;
     margin-right: 0;
     border-radius: 7px 0 0 7px;
-    border: 0px solid #B8DD62;
+    border: 0px solid #90c908;
 }
 
 .submit-email {
@@ -123,8 +123,8 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px;
-    border: 0px solid #B8DD62;
-    background-color: #B8DD62;
+    border: 0px solid #90c908;
+    background-color: #90c908;
 
     border-radius: 0 7px 7px 0;
 }

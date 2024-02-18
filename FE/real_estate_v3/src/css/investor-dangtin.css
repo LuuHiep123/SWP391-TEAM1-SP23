@@ -40,7 +40,7 @@
 .buuton-logout {
     width: 120px;
     height: 30px;
-    background-color: #B8DD62;
+    background-color: #90c908;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -131,7 +131,7 @@ input {
 button {
     margin-top: 10px;
     padding: 8px 16px;
-    background-color: #007bff;
+    background-color: #90c908;
     /* Bootstrap's primary color */
     color: #fff;
     border: none;
@@ -140,7 +140,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #90c908;
     /* Darker shade for hover effect */
 }
 
@@ -148,16 +148,16 @@ button:hover {
     margin-left: 2px;
     width: 30%;
     /* Điều chỉnh độ rộng của select box */
-    height: 50px;
+    height: 40px;
     /* Điều chỉnh chiều cao của select box */
     padding: 5px;
     /* Điều chỉnh padding bên trong của select box */
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 400;
     /* Điều chỉnh kích thước chữ */
     border: 1px solid #000000;
     /* Điều chỉnh viền của select box */
-    border-radius: 9px;
+    border-radius: 4px;
     /* Bo tròn các góc của select box */
     background-color: #fff;
     /* Màu nền của select box */
@@ -167,7 +167,7 @@ button:hover {
     /* Loại bỏ viền màu xanh khi focus */
     cursor: pointer;
     /* Chuyển đổi con trỏ thành hình bàn tay khi di chuột qua */
-    text-align: center;
+    text-align: left;
 
     justify-content: center;
 
@@ -260,10 +260,10 @@ button:hover {
 }
 
 .button-dangtin:hover {
-    background-color: #B8DD62;
+    background-color: #90c908;
     color: white;
-    border: 2px solid#B8DD62;
-    background-color: #B8DD62;
+    border: 2px solid#90c908;
+    background-color: #90c908;
 
 }
 

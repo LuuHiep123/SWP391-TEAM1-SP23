@@ -3,6 +3,9 @@ import './css/footer.css';
 import './css/login.css';
 import './css/investor-dangtin.css';
 import './css/customer-fillter.css';
+import './css/customer-trangchu-banvila.css';
+import './css/customer-chaomung.css';
+
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './header-footer/Header';

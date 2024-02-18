@@ -1,0 +1,79 @@
+.estate-container {
+    width: auto;
+    height: auto;
+    padding: 10px;
+    background-color: #f7f7f7;
+
+
+}
+
+.investor-heading {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.estates-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.estate-item {
+    flex: 0 0 calc(33.33% - 20px);
+    /* Sử dụng 20% của container cha */
+    margin: 0 10px 20px 0;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.estate-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.estate-name {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* Canh chỉnh các ảnh ngang nhau */
+}
+
+.image-item {
+    margin-bottom: 10px;
+}
+
+.image-info {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.estate-image {
+    width: 100%;
+    height: 300px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    /* căn giữa theo chiều ngang */
+    margin-top: 20px;
+    /* thay đổi giá trị margin-top tùy ý */
+
+}
+
+.show-more-button {
+    background-color: #90c908;
+    border-radius: 9px;
+    color: white;
+    width: 130px;
+    height: 40px;
+    font-size: 17px;
+    font-weight: 500;
+
+}

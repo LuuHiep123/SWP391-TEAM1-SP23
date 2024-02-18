@@ -13,22 +13,32 @@
     align-items: center;
 }
 
+.menu-item-container:hover .menu-item,
+.menu-item-container:hover i {
+
+    align-items: center;
+    color: #90c908;
+}
+
 .menu-item:hover {
-    color: rgba(98, 215, 55, 0.921);
+    color: #90c908;
 }
 
 .menu-item {
-    margin-left: 30px;
+
+    margin-left: 20px;
     text-decoration: none;
     color: black;
-    font-weight: 700;
-    font-size: 20px;
-    font-family: 'Karla', sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 
 
 .logo-batdongsan {
+    margin-left: 60px;
+    margin-right: 50px;
     padding: 0px 0px 0px 0px;
     width: 110px;
     height: 80px;
@@ -41,16 +51,20 @@
 /* header-container.css */
 .dropdown-menu {
     display: none;
+    /* Ẩn menu ban đầu */
     position: absolute;
-    background-color: rgb(255, 255, 255);
-    border: none;
-
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 999;
+    /* Đảm bảo menu hiển thị trên cùng */
+    transition: all 10s ease;
+    /* Thêm hiệu ứng chuyển động */
 }
 
 .dropdown:hover .dropdown-menu {
     display: block;
-    background-color: rgba(255, 255, 255, 0.9);
-
+    /* Hiển thị menu khi hover */
 }
 
 .text-drop {
@@ -61,7 +75,7 @@
 }
 
 .text-drop:hover {
-    color: rgba(98, 215, 55, 0.921);
+    color: #90c908;
 }
 
 .logo_notification, .logo-taikhoan {
@@ -93,7 +107,7 @@
 }
 
 .login-link:hover {
-    color: rgba(98, 215, 55, 0.921);
+    color: #90c908;
 }
 
 .header {

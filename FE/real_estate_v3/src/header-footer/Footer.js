@@ -25,7 +25,7 @@ export default function Footer() {
                 <div className='row'>
                     <div className="col-md-3">
                         <div className='part1'>
-                            <img className='lgo-bds' src='./logofooter/logo-footer-batdongsan.png' alt='' />
+                            <img className='lgo-bds' src='/logofooter/logo-footer-batdongsan.png' alt='' />
                             <span className='text-intro'>Sứ mệnh của Pass Môn là đặt chất lượng<br /> cuộc sống khách hàng trở thành ưu tiên<br /> số 1 để đem lại sự an tâm và lợi ích phát<br /> triển cho khách hàng, góp phần tích cực<br /> vào một xã hội.</span>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ export default function Footer() {
                             <div className='buton-email'>
                                 <input className='input-email' placeholder='Email của bạn'></input>
                                 <button className='submit-email'>
-                                    <img src='logofooter/logo_submit.png' alt='asd' className="button-image" />
+                                    <img src='/logofooter/logo_submit.png' alt='asd' className="button-image" />
                                 </button>
                             </div>
                         </div>

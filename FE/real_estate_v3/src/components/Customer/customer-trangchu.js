@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CustomerFillter from './customer-fillter';
 import Customertrangchubanvila from './customer-trangchu-banvila';
+import Customerchaomung from './customer-chaomung';
 
 export default function Trangchu() {
     const [userData, setUserData] = useState([]);
@@ -22,6 +23,7 @@ export default function Trangchu() {
             <CustomerFillter />
 
             <Customertrangchubanvila />
+            <Customerchaomung />
 
         </div>
     );

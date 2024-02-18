@@ -28,7 +28,7 @@ const Home = () => {
                 {previewImages && previewImages.length > 0 ? (
                     <>
                         <img src={previewImages[0]} alt="Preview" style={{ width: '300px', height: '300px' }} />
-
+                        <input className='chontep' type="file" onChange={handleImageChange} />
                     </>
                 ) : (
                     <>
@@ -61,8 +61,19 @@ const Home = () => {
         // Chuyển đổi số thành chuỗi và đảm bảo nó không chứa ký tự không phải là số
         const numericPrice = (price).toString().replace(/[^0-9]/g, '');
 
-        // Chia chuỗi thành các phần nhỏ hơn 3 số và nối chúng bằng dấu chấm
-        return numericPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        // Hàm này chia chuỗi thành các phần nhỏ hơn 3 số và nối chúng bằng dấu chấm
+        function insertThousandsSeparators(str) {
+            // Chia chuỗi thành các nhóm có 3 số
+            const groups = [];
+            for (let i = str.length; i > 0; i -= 3) {
+                groups.unshift(str.substring(Math.max(0, i - 3), i));
+            }
+            // Nối các nhóm lại với nhau, giữa mỗi nhóm là dấu chấm
+            return groups.join('.');
+        }
+
+        // Sử dụng hàm insertThousandsSeparators để chia ra 3 số một lần
+        return insertThousandsSeparators(numericPrice);
     }
 
 
@@ -201,6 +212,7 @@ const Home = () => {
     const handleImageChange = (e, setter, setPreviewImages) => {
         if (e.target.files[0]) {
             const file = e.target.files[0];
+            const fileName = file.name; // Trích xuất tên tệp từ thuộc tính name của đối tượng file
             // Use FileReader to read file data and set preview image URL
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -208,12 +220,14 @@ const Home = () => {
             };
             reader.readAsDataURL(file);
             setter(file); // Set corresponding image state with selected file
+
+            console.log('Selected file name:', fileName); // In tên tệp đã chọn ra console
         }
     };
 
-
+    const imageName = propertyInfo.realestateName ? propertyInfo.realestateName.toLowerCase().replace(/\s+/g, '-') : "default";
     const handleSubmit = async () => {
-        const imageRef1 = ref(storage, "Ảnh Mặt Trước-id-" + userLoginBasicInformationDto.accountId + "/anhmattruoc");
+        const imageRef1 = ref(storage, `Ảnh Mặt Trước-id-${userLoginBasicInformationDto.accountId}/${imageName}`);
         try {
             await uploadBytes(imageRef1, image1);
             const downloadURL = await getDownloadURL(imageRef1);
@@ -237,7 +251,7 @@ const Home = () => {
 
 
     const handleSubmit1 = async () => {
-        const imageRef2 = ref(storage, "Ảnh Bên Trái-id-" + userLoginBasicInformationDto.accountId + "/image1");
+        const imageRef2 = ref(storage, `Ảnh Bên Trái-id-${userLoginBasicInformationDto.accountId}/${imageName}`);
         try {
             await uploadBytes(imageRef2, image2);
             const downloadURL2 = await getDownloadURL(imageRef2);
@@ -256,7 +270,7 @@ const Home = () => {
     };
 
     const handleSubmit2 = async () => {
-        const imageRef3 = ref(storage, "Ảnh Bên Phải-id-" + userLoginBasicInformationDto.accountId + "/image1");
+        const imageRef3 = ref(storage, `Ảnh Bên Phải-id-${userLoginBasicInformationDto.accountId}/${imageName}`);
         try {
             await uploadBytes(imageRef3, image3);
             const downloadURL3 = await getDownloadURL(imageRef3);
@@ -275,7 +289,7 @@ const Home = () => {
     };
 
     const handleSubmit3 = async () => {
-        const imageRef4 = ref(storage, "Ảnh Sơ Đồ Đất-id-" + userLoginBasicInformationDto.accountId + "/image1");
+        const imageRef4 = ref(storage, `Ảnh Sơ Đồ Đất-id-${userLoginBasicInformationDto.accountId}/${imageName}`);
         try {
             await uploadBytes(imageRef4, image4);
             const downloadURL4 = await getDownloadURL(imageRef4);
@@ -294,7 +308,7 @@ const Home = () => {
     };
 
     const handleSubmit4 = async () => {
-        const imageRef5 = ref(storage, "Ảnh Sổ Hồng-id-" + userLoginBasicInformationDto.accountId + "/image1");
+        const imageRef5 = ref(storage, `Ảnh Sổ Hồng-id-${userLoginBasicInformationDto.accountId}/${imageName}`);
         try {
             await uploadBytes(imageRef5, image5);
             const downloadURL5 = await getDownloadURL(imageRef5);
