@@ -58,23 +58,22 @@ const Home = () => {
         setUrl1234(null);
     };
     function formatPrice(price) {
-        // Chuyển đổi số thành chuỗi và đảm bảo nó không chứa ký tự không phải là số
-        const numericPrice = (price).toString().replace(/[^0-9]/g, '');
+        // Loại bỏ tất cả các dấu phân cách hàng nghìn và chỉ giữ lại ký tự số
+        const numericPrice = price.replace(/\D/g, '');
 
-        // Hàm này chia chuỗi thành các phần nhỏ hơn 3 số và nối chúng bằng dấu chấm
-        function insertThousandsSeparators(str) {
-            // Chia chuỗi thành các nhóm có 3 số
-            const groups = [];
-            for (let i = str.length; i > 0; i -= 3) {
-                groups.unshift(str.substring(Math.max(0, i - 3), i));
-            }
-            // Nối các nhóm lại với nhau, giữa mỗi nhóm là dấu chấm
-            return groups.join('.');
-        }
+        // Định dạng lại chuỗi giá trị với dấu phân cách hàng nghìn
+        const formattedPrice = numericPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
-        // Sử dụng hàm insertThousandsSeparators để chia ra 3 số một lần
-        return insertThousandsSeparators(numericPrice);
+        console.log("TEST numericPrice: ", numericPrice);
+        console.log("TEST price: ", formattedPrice);
+        return formattedPrice;
     }
+
+    const formatAndSetPrice = (price) => {
+        const numericPrice = price.replace(/\D/g, ''); // Loại bỏ tất cả các ký tự không phải số
+        const formattedPrice = formatPrice(numericPrice); // Định dạng giá trị price
+        setPropertyInfo({ ...propertyInfo, price: formattedPrice }); // Cập nhật giá trị price đã được định dạng vào state
+    };
 
 
     const [selectedLocation, setSelectedLocation] = useState({
@@ -115,16 +114,12 @@ const Home = () => {
 
     const [hardcodedValues, setHardcodedValues] = useState({
         firebaseId: "",
-        // investorId: userLoginBasicInformationDto.accountId,
         payId: 1,
         locationId: 0,
         directId: 2,
         perimeter: "50",
         legalStatus: "Sổ Đỏ",
         status: 1,
-        // ward: "phường 2",
-        // district: "Quận 1",
-        // city: "Hồ Chí Minh",
         ward: selectedLocation.wardName,
         district: selectedLocation.districtName,
         city: selectedLocation.provinceName,
@@ -165,6 +160,7 @@ const Home = () => {
             const downloadURL3 = await handleSubmit2();
             const downloadURL4 = await handleSubmit3();
             const downloadURL5 = await handleSubmit4();
+
             const dataToSubmit = {
                 ...hardcodedValues,
                 ...propertyInfo,
@@ -176,6 +172,7 @@ const Home = () => {
                     { imageName: "Ảnh Sơ Đồ Đất", imageUrl: downloadURL5, status: true }
                 ],
             };
+            const jsonString = JSON.stringify(dataToSubmit);
             console.log('Selected Location:', selectedLocation);
             console.log('City:', selectedLocation.provinceName);
             console.log('District:', selectedLocation.districtName);
@@ -183,7 +180,7 @@ const Home = () => {
             console.log('Data to submit:', dataToSubmit);
             await axios.post(
                 'http://firstrealestate-001-site1.anytempurl.com/api/invester/createNewRealEstate/' + userLoginBasicInformationDto.accountId,
-                dataToSubmit,
+                jsonString,
                 {
                     headers: {
                         'accept': '*/*',
@@ -208,7 +205,7 @@ const Home = () => {
     const [url, setUrl] = useState(null);
     const [url2, setUrl2] = useState(null);
     const [url23, setUrl23] = useState(null);
-    const [url1234, setUrl1234] = useState(null);
+    const [x, setUrl1234] = useState(null);
     const handleImageChange = (e, setter, setPreviewImages) => {
         if (e.target.files[0]) {
             const file = e.target.files[0];
@@ -345,11 +342,11 @@ const Home = () => {
 
     const handleSubmitData = async () => {
         try {
-            if (!image1 || !image2 || !image3 || !image4 || !image5) {
-                console.log('Vui lòng chọn đủ tất cả các hình ảnh trước khi đăng tin.');
-                return;
-            }
-            await submitDataToSwagger();
+            // if (!image1 || !image2 || !image3 || !image4 || !image5) {
+            //     console.log('Vui lòng chọn đủ tất cả các hình ảnh trước khi đăng tin.');
+            //     return;
+            // }
+
             resetImages();
             setPropertyInfo({
                 realestateName: '',
@@ -361,7 +358,10 @@ const Home = () => {
                 area: '',
                 price: '',
                 discount: '',
-            });
+
+            })
+            await submitDataToSwagger();
+            ;
             console.log({
                 hardcodedValues,
                 propertyInfo,
@@ -369,7 +369,7 @@ const Home = () => {
             });
             setSuccessMessage("Đăng tin thành công!");
         } catch (error) {
-            setSuccessMessage("Đăng tin thất bại!");
+
             console.error('Failed to submit data:', error.message);
         }
     };
@@ -515,8 +515,8 @@ const Home = () => {
                             <span className='tieude1'>Mức giá</span>
                             <input
                                 type="text"
-                                value={formatPrice(propertyInfo.price)}
-                                onChange={(e) => setPropertyInfo({ ...propertyInfo, price: e.target.value })}
+                                value={propertyInfo.price}
+                                onChange={(e) => formatAndSetPrice(e.target.value)}
                             />
                         </div>
                     </div>
