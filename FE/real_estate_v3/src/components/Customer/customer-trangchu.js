@@ -3,6 +3,8 @@ import axios from 'axios';
 import CustomerFillter from './customer-fillter';
 import Customertrangchubanvila from './customer-trangchu-banvila';
 import Customerchaomung from './customer-chaomung';
+import Customertrangchutinnoibat from './customer-trangchu-tinnoibat';
+
 
 export default function Trangchu() {
     const [userData, setUserData] = useState([]);
@@ -24,6 +26,7 @@ export default function Trangchu() {
 
             <Customertrangchubanvila />
             <Customerchaomung />
+            <Customertrangchutinnoibat />
 
         </div>
     );

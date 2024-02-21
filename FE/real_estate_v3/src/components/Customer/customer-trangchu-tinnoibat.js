@@ -11,8 +11,9 @@ export default function Customertrangchubanvila() {
   useEffect(() => {
     axios.get('http://firstrealestate-001-site1.anytempurl.com/api/invester/getAllRealEstate')
       .then(response => {
-        const estatesWithInvestorId2 = response.data.filter(estate => estate.investorId === 6);
-        setRealEstates(estatesWithInvestorId2);
+        const sortedData = response.data.sort((a, b) => b.id - a.id);
+        const latestRealEstates = sortedData.slice(0, 10);
+        setRealEstates(latestRealEstates);
       })
       .catch(error => {
         console.error('Error fetching data: ', error);
@@ -96,7 +97,7 @@ export default function Customertrangchubanvila() {
           <div class="real-title">
             <div className='text-realtitle'>
               <span className='textso1'>NHÀ ĐẤT</span>
-              <h2 className='textso2'>BÁN</h2>
+              <h2 className='textso2'>NỔI BẬT</h2>
             </div>
           </div>
         </div>

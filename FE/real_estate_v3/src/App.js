@@ -5,6 +5,7 @@ import './css/investor-dangtin.css';
 import './css/customer-fillter.css';
 import './css/customer-trangchu-banvila.css';
 import './css/customer-chaomung.css';
+import './css/customer-gioithieu.css';
 
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -20,7 +21,7 @@ import Quanlitindang from './components/Investor/investor-quanlitindang';
 import AuthRoleFilter from './authentication/AuthRoleFilter';
 import Agencytindang from './components/Agency/agency-tindang';
 import Agencythongtinchitiet from './components/Agency/agency-thongtinchitiet';
-
+import Customergioithieu from './components/Customer/customer-gioithieu';
 function App() {
   const [userInfo, setUserInfo] = useState(null);
 
@@ -55,6 +56,7 @@ function App() {
             }
           />
           <Route path="/trangchu" element={<TrangChu />} />
+          <Route path="/gioithieu" element={<Customergioithieu />} />
           <Route path="/quanlitindang" element={<Quanlitindang />} />
           <Route path="/acencytindang" element={<Agencytindang />} />
           <Route path="/agencythongtinchitiet" element={<Agencythongtinchitiet />} />

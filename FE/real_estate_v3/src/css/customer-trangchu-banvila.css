@@ -12,6 +12,8 @@
     justify-content: center;
 }
 
+
+
 .investor-heading {
     font-size: 24px;
     font-weight: bold;
@@ -20,7 +22,6 @@
 .estates-wrapper {
 
     width: 1170px;
-
     background-color: #f9f9f9;
     display: flex;
     flex-wrap: wrap;
@@ -35,6 +36,13 @@
     margin: 0 10px 20px 0;
     background-color: #f9f9f9;
     border: 1px solid rgb(255, 255, 255)
+}
+
+.main-title {
+
+    background-color: #f7f7f7;
+    width: 1420px;
+    margin-bottom: 10px;
 }
 
 .estate-info {
@@ -97,6 +105,7 @@
     justify-content: center;
     /* căn giữa theo chiều ngang */
     margin-top: 20px;
+    margin-bottom: 30px;
     /* thay đổi giá trị margin-top tùy ý */
 
 }
@@ -156,4 +165,28 @@
     color: #333;
     font-size: 14px;
     margin-bottom: 7px;
+}
+
+
+.real-title {
+    margin-left: 10%;
+    padding-left: 15px;
+    margin-top: 30px;
+    width: 5px;
+    border-radius: 1px;
+    background-color: #90c908;
+}
+
+.text-realtitle {
+    margin-left: 20px;
+    width: 560px;
+}
+
+.textso1 {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.textso2 {
+    color: #90c908;
 }

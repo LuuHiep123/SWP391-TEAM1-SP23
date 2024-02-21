@@ -1,0 +1,11 @@
+h2 {
+    cursor: default;
+}
+
+.dangcapgioithieu {
+    text-transform: uppercase;
+}
+
+.TrangGioiThieu {
+    display: flex;
+}
